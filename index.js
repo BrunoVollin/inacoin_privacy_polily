@@ -1,11 +1,6 @@
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { "content-type": "text/html" });
-  fs.createReadStream("index.html").pipe(res);
-});
-
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+app.get("/", (req, res) => res.sendFile("index.html", { root: __dirname }));
+app.listen(port, () => console.log(`Example app listening on port port!`));
